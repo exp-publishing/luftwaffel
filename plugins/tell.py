@@ -102,7 +102,7 @@ def tell_check(conn, nick):
             return True
 
 
-@hook.event(EventType.message, singlethread=True)
+@hook.event([EventType.message, EventType.action], singlethread=True)
 def tell_watch(event, conn, db, chan, nick, message, ctcp, reply):
     """
     :type event: cloudbot.event.Event
