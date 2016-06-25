@@ -7,11 +7,13 @@ from cloudbot.util.formatting import ireplace
 # TODO: implement global/self-only corrections as a setting
 # From the default CloudBot module:
 #
-# correction_re = re.compile(r"^[sS]/(.*/.*(?:/[igx]{,4})?)\S*$")
 # ...
 # if correction_re.match(msg):
 #     # don't correct corrections, it gets really confusing
 #     continue
+# ...
+
+correction_re = re.compile(r"^[sS]/(.*/.*(?:/[igx]{,4})?)\S*$")
 
 @hook.regex(correction_re)
 def correction(match, conn, chan, message, nick):
