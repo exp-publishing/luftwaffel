@@ -113,8 +113,7 @@ def check_reminders(bot, async, db):
             delta = (remind_time-added_time).seconds
             if delta > (30*60):
                 late_time = time_since(remind_time, count=2)
-                late = "(Sorry for delivering that message $(b){}$(clear) late. I promise that I tried."
-                            .format(late_time)
+                late = "Sorry for delivering that message $(b){}$(clear) late. I promise that I tried.".format(late_time)
                 conn.message(user, colors.parse(late))
 
             yield from delete_reminder(async, db, network, remind_time, user)
@@ -130,7 +129,7 @@ def remind(text, nick, chan, db, conn, notice, async):
     """<1m30s>: <do task> -- reminds you to <do task> in <1 minute, 30 seconds>.If no colon is given, only the first word will be used to determine the time.
     """
 
-    count = len([x for x in reminder_cache if x[0] == conn.name and x[4].lower() == nick.lower()]))
+    count = len([x for x in reminder_cache if x[0] == conn.name and x[4].lower() == nick.lower()])
 
     if text == "clear":
         if count == 0:
