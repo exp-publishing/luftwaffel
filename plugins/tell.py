@@ -21,7 +21,7 @@ from cloudbot.util import timeformat, database
 from cloudbot.event import EventType
 
 table = Table(
-    'hfy-tells',
+    'expp-tells',
     database.metadata,
     Column('connection', String(25)),
     Column('channel', String(25, collation='NOCASE')),
@@ -33,7 +33,6 @@ table = Table(
     Column('time_read', DateTime),
     extend_existing=True
 )
-
 
 @hook.on_start
 def load_cache(db):
