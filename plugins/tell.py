@@ -127,12 +127,11 @@ def tell_watch(event, conn, db, chan, nick, message, ctcp, reply):
         out = "{}: [{}, {}] {}".format(nick, _from, reltime, _message)
         read_tell(db, conn.name, _channel, nick, _message)
 
-        if sent == ratelimit:
-            reply("{} more tells sent privately.".format(len(tells) - sent))
-
         if sent < ratelimit:
             message(out)
         else:
+            if sent == ratelimit + 1:
+                reply("{} more tells sent privately.".format(len(tells) - sent))
             ctcp(out)
         sent += 1
 
