@@ -124,7 +124,7 @@ def tell_watch(event, conn, db, chan, nick, ctcp, reply):
         else:
             reltime += " ago"
 
-        out = "[{}, {}] {}".format(nick, reltime, _message)
+        out = "[{}, {}] {}".format(_from, reltime, _message)
         read_tell(db, conn.name, _channel, nick, _message)
 
         if sent < ratelimit:

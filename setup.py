@@ -17,7 +17,7 @@ with open('requirements.txt', 'r') as f:
 
 setup(
     name='expp-irc',
-    version='0.0.0',
+    version='0.0.1',
 
     description='CloudBot IRC Bot.',
     long_description=(

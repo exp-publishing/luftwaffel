@@ -109,7 +109,7 @@ def check_reminders(bot, async, db):
                 return
 
             reltime = time_since(added_time, simple=True, count=1)
-            conn.message(added_chan, '{}: [reminder from {} ago] {}"'
+            conn.message(added_chan, '{}: [reminder from {} ago] {}'
                                         .format(user, reltime, message))
 
             delta = (remind_time-added_time).seconds
