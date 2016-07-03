@@ -6,6 +6,8 @@ Allows users to add reminders for various tasks.
 Created By:
     - Pangea <https://github.com/PangeaCake>
     - Luke Rogers <https://github.com/lukeroge>
+Modified By:
+    - Josh Elsasser <https://github.com/jaelsasser>
 
 License:
     GPL v3
@@ -113,7 +115,8 @@ def check_reminders(bot, async, db):
             delta = (remind_time-added_time).seconds
             if delta > (30*60):
                 late_time = time_since(remind_time, count=2)
-                late = "Sorry for delivering that message $(b){}$(clear) late. I promise that I tried.".format(late_time)
+                late = "Sorry for delivering that message $(b){}$(clear) late" \
+                    .format(late_time)
                 conn.message(user, colors.parse(late))
 
             yield from delete_reminder(async, db, network, remind_time, user)
