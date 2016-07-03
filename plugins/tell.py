@@ -8,7 +8,6 @@ Modified By:
 License:
     GNU General Public License (Version 3)
 """
-# TODO: true case-insensitve matching
 
 import re
 from datetime import datetime
@@ -34,6 +33,7 @@ table = Table(
     extend_existing=True
 )
 
+
 @hook.on_start
 def load_cache(db):
     """
@@ -43,8 +43,9 @@ def load_cache(db):
     tell_cache = []
     for row in db.execute(table.select().where(table.c.is_read == 0)):
         conn = row["connection"]
+        chan = row["channel"]
         target = row["target"]
-        tell_cache.append((conn, target))
+        tell_cache.append((conn, chan, target))
 
 
 def get_unread(db, server, target, channel='*'):
@@ -52,7 +53,7 @@ def get_unread(db, server, target, channel='*'):
     query = select([table.c.sender, table.c.channel, table.c.message, table.c.time_sent]) \
         .where(table.c.connection == server.lower()) \
         .where((table.c.channel == '*') | (table.c.channel == channel.lower())) \
-        .where(table.c.target == target) \
+        .where(table.c.target == target.lower()) \
         .where(table.c.is_read == 0) \
         .order_by(table.c.time_sent)
     return db.execute(query).fetchall()
@@ -61,7 +62,7 @@ def get_unread(db, server, target, channel='*'):
 def count_unread(db, server, target):
     query = select([table]) \
         .where(table.c.connection == server.lower()) \
-        .where(table.c.target == target) \
+        .where(table.c.target == target.lower()) \
         .where(table.c.is_read == 0) \
         .alias("count") \
         .count()
@@ -85,7 +86,7 @@ def add_tell(db, server, channel, sender, target, message):
         connection=server.lower(),
         channel=channel.lower(),
         sender=sender,
-        target=target,
+        target=target.lower(),
         message=message,
         is_read=False,
         time_sent=datetime.today()
@@ -96,13 +97,13 @@ def add_tell(db, server, channel, sender, target, message):
 
 
 def tell_check(conn, nick):
-    for _conn, _target in tell_cache:
-        if (conn, nick.lower()) == (_conn, _target.lower()):
+    for _conn, _chan, _target in tell_cache:
+        if (conn.lower(), nick.lower()) == (_conn.lower(), _target.lower()):
             return True
 
 
 @hook.event([EventType.message, EventType.action], singlethread=True)
-def tell_watch(event, conn, db, chan, nick, message, ctcp, reply):
+def tell_watch(event, conn, db, chan, nick, ctcp, reply):
     """
     :type event: cloudbot.event.Event
     :type conn: cloudbot.client.Client
@@ -123,11 +124,11 @@ def tell_watch(event, conn, db, chan, nick, message, ctcp, reply):
         else:
             reltime += " ago"
 
-        out = "{}: [{}, {}] {}".format(nick, _from, reltime, _message)
+        out = "[{}, {}] {}".format(nick, reltime, _message)
         read_tell(db, conn.name, _channel, nick, _message)
 
         if sent < ratelimit:
-            message(out)
+            reply(out)
         else:
             if sent == ratelimit + 1:
                 reply("{} more tells sent privately.".format(len(tells) - sent))
@@ -166,7 +167,8 @@ def tell_cmd(text, nick, db, notice, conn, chan):
         chan = '*'
 
     if count_unread(db, conn.name, target) >= 25:
-        notice("What, you trying to kill someone? {} has too many messages queued already.".format(target))
+        notice("{} has too many messages queued already. Try again later"
+                    .format(target))
         return
 
     add_tell(db, conn.name, chan, sender, target, message)
