@@ -1,0 +1,103 @@
+{
+    "api_keys": {
+        "bing_azure": "",
+        "google_cse_id": "",
+        "google_dev_key": "",
+        "imgur_client_id": "",
+        "imgur_client_secret": "",
+        "lastfm": "",
+        "octopart": "",
+        "rdio_key": "",
+        "rdio_secret": "",
+        "rottentomatoes": "",
+        "soundcloud": "",
+        "tvdb": "",
+        "twitter_access_secret": "",
+        "twitter_access_token": "",
+        "twitter_consumer_key": "",
+        "twitter_consumer_secret": "",
+        "wolframalpha": "",
+        "wordnik": "",
+        "wunderground": ""
+    },
+    "connections": [
+        {
+            "acls": {},
+            "avoid_notices": true,
+            "channels": [
+                "#test"
+            ],
+            "command_prefix": ".",
+            "connection": {
+                "ignore_cert": true,
+                "password": "",
+                "port": 6667,
+                "server": "127.0.0.1",
+                "ssl": false
+            },
+            "disabled_commands": [
+                "..."
+            ],
+            "invite_join": true,
+            "name": "Luftie",
+            "nick": "Luftie",
+            "nickserv": {
+                "enabled": false,
+                "nickserv_command": "IDENTIFY",
+                "nickserv_name": "NickServ",
+                "nickserv_password": "noimnotputtingthishere",
+                "nickserv_user": ""
+            },
+            "permissions": {
+                "admins": {
+                    "perms": [
+                        "ignore",
+                        "botcontrol",
+                        "plpaste",
+                        "permissions_users",
+                        "op"
+                    ],
+                    "users": [
+                        "*!*@*"
+                    ]
+                }
+            },
+            "plugins": {},
+            "ratelimit": {
+                "max_tokens": 17.5,
+                "message_cost": 5,
+                "restore_rate": 2.5,
+                "strict": true
+            },
+            "realname": "Luftie Test Instance",
+            "user": "luftie"
+        }
+    ],
+    "database": "sqlite:///test/sqlite.db",
+    "logging": {
+        "console_debug": true,
+        "file_debug": true,
+        "raw_file_log": true,
+        "show_motd": false,
+        "show_plugin_loading": true,
+        "show_server_info": false
+    },
+    "plugin_loading": {
+        "blacklist": [
+		"spellcheck",
+		"geoip"
+	],
+        "use_whitelist": false,
+        "whitelist": []
+    },
+    "reloading": {
+        "config_reloading": true,
+        "plugin_reloading": true
+    },
+    "web": {
+        "address": "0.0.0.0",
+        "bot_name": "CloudBot",
+        "enabled": false,
+        "port": 8090
+    }
+}

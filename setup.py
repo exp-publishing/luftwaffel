@@ -4,7 +4,7 @@ from setuptools import setup
 import sys
 
 if sys.version_info < (3, 4):
-    raise ImportError('CloudBot requires Python 3.4 or later.')
+    raise ImportError('Requires Python 3.4 or later.')
 
 with open('requirements.txt', 'r') as f:
     requires = []
@@ -19,7 +19,7 @@ setup(
     name='expp-irc',
     version='0.0.1',
 
-    description='CloudBot IRC Bot.',
+    description='ExP Publishing IRC Plugins',
     long_description=(
         'ExP Publishing plugins for the CloudBot IRC Bot.'
     ),
@@ -27,13 +27,16 @@ setup(
     url='https://github.com/exp-publishing/cloudbot-plugins',
     license='GPLv3',
 
+    include_package_data=True,
     install_requires=requires,
     dependency_links=depends,
 
     packages=[
-        'expp.irc',
+        'expp.cloudbot.plugins',
+        'expp.cloudbot.test',
     ],
     package_dir={
-        'expp.irc': 'plugins',
+        'expp.cloudbot.plugins': 'plugins',
+        'expp.cloudbot.test': 'test',
     },
 )
