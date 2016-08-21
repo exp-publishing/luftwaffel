@@ -110,7 +110,7 @@ def dice(text, notice):
 
 
 @asyncio.coroutine
-@hook.command
+@hook.command("choice", "choose")
 def choose(text, notice):
     """<choice1>, [choice2], [choice3], etc. - randomly picks one of the given choices
     :type text: str
