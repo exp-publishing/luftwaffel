@@ -1,0 +1,129 @@
+{
+    "connections": [
+        {
+            "name": "snoonet",
+            "connection": {
+                "server": "irc.snoonet.org",
+                "port": 6697,
+                "ssl": true,
+                "ignore_cert": true,
+                "password": ""
+            },
+            "nick": "LuftWaffle",
+            "user": "cloudbot",
+            "avoid_notices": false,
+            "channels": [
+                "#HFY",
+                "##HFYspoilers",
+                "##HFYpolitics",
+                "##HFYrpg"
+            ],
+            "disabled_commands": [],
+            "acls": {},
+            "nickserv": {
+                "enabled": true,
+                "nickserv_password": "changeme",
+                "nickserv_user": "",
+                "nickserv_name": "nickserv",
+                "nickserv_command": "IDENTIFY"
+            },
+            "ratelimit": {
+                "max_tokens": 17.5,
+                "restore_rate": 2.5,
+                "message_cost": 5,
+                "strict": true
+            },
+            "permissions": {
+                "admins": {
+                    "perms": [
+                        "ignore",
+                        "botcontrol",
+                        "permissions_users",
+                        "op"
+                    ],
+                    "users": [
+                        "*!*@HFY/Meatfcker",
+                        "*!*@hfy/ctwelve",
+                        "*!*@user/Synthaxx"
+                    ]
+                },
+                "moderators": {
+                    "perms": [
+                        "ignore",
+                        "botcontrol"
+                    ],
+                    "users": [
+                        "*!*@HFY/GamingWolfie",
+                        "*!*@hfy/fourbags",
+                        "*!*@user/Blackknight64",
+                        "*!*@user/Equinox23"
+                    ]
+                }
+            },
+            "plugins": {},
+            "command_prefix": "."
+        }
+    ],
+    "api_keys": {
+        "tvdb": "",
+        "bing_azure": "",
+        "wolframalpha": "",
+        "lastfm": "",
+        "rottentomatoes": "",
+        "soundcloud": "",
+        "twitter_consumer_key": "",
+        "twitter_consumer_secret": "",
+        "twitter_access_token": "",
+        "twitter_access_secret": "",
+        "imgur_client_id": "",
+        "imgur_client_secret": "",
+        "wunderground": "",
+        "rdio_key": "",
+        "rdio_secret": "",
+        "google_dev_key": "",
+        "google_cse_id": "",
+        "octopart": "",
+        "wordnik": ""
+    },
+    "database": "sqlite://data/luftwaffel.db",
+    "plugin_loading": {
+        "use_whitelist": true,
+        "blacklist": [],
+        "whitelist": [
+            "core_ctcp",
+            "core_misc",
+            "core_sieve",
+            "core_tracker",
+            "corection",
+            "gaming",
+            "github",
+            "log",
+            "poll",
+            "reddit",
+            "regex_chans",
+            "remind",
+            "tell",
+            "tell",
+            "utility",
+            "youtube"
+        ]
+    },
+    "web": {
+      "enabled": false,
+      "address": "0.0.0.0",
+      "port": 8090,
+      "bot_name": "CloudBot"
+    },
+    "reloading": {
+        "config_reloading": true,
+        "plugin_reloading": false
+    },
+    "logging": {
+        "console_debug": true,
+        "file_debug": false,
+        "show_plugin_loading": true,
+        "show_motd": false,
+        "show_server_info": true,
+        "raw_file_log": false
+    }
+}
