@@ -48,11 +48,7 @@ def server(request):
     return server
 
 
-@pytest.fixture(scope='session')
-def bot(request, server):
-    """Return a CloudBot instance connected to a local irc server
-    """
-    def run_bot(loop):
+def run_bot(loop):
         asyncio.set_event_loop(loop)
 
         paths.add_plugin_dir('plugins')
@@ -65,6 +61,12 @@ def bot(request, server):
         bot = CloudBot(loop)
         bot.run()
 
+
+@pytest.fixture(scope='session')
+def bot(request, server):
+    """Return a CloudBot instance connected to a local irc server
+    """
+
     thread = threading.Thread(target=run_bot, args=(asyncio.get_event_loop(),))
     thread.daemon = True
     thread.start()
@@ -72,3 +74,10 @@ def bot(request, server):
     def fin():
         thread.join(5)
     request.addfinalizer(fin)
+
+
+@pytest.fixture(scope='session')
+def bot_blocking(request, server):
+    """Return a blocking CloudBot instance connected to a local irc server
+    """
+    run_bot(asyncio.get_event_loop())
