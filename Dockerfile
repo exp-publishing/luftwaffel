@@ -1,6 +1,5 @@
-FROM python:3.5.2-alpine
+FROM python:3-alpine
 MAINTAINER Josh Elsasser <josh@elsasser.ca>
-
 
 # install the base CloudBot application + dependencies
 # (yes, there are a lot of them...)
